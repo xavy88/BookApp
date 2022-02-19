@@ -1,11 +1,10 @@
 ﻿@model Category
-<form method="post">
+<form method="post" asp-action="Edit">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Create Category</h2>
+            <h2 class="text-primary">Edir Category</h2>
             <hr />
         </div>
-        <div asp-validation-summary="All" class="danger"></div>
         <div class="mb-3 col-4">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control" />
@@ -16,7 +15,7 @@
             <input asp-for="DisplayOrder" class="form-control" />
              <span asp-validation-for="DisplayOrder" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:150px"><i class="bi bi-plus-circle"></i> Create</button>
+        <button type="submit" class="btn btn-primary" style="width:150px"><i class="bi bi-plus-circle"></i> Update</button>
         <a asp-controller="Category" asp-action="index" class="btn btn-secondary" style="width:150px;">
             <i class="bi bi-skip-backward-circle-fill"></i> Back to list
         </a>
