@@ -1,21 +1,20 @@
 ﻿@model Category
-<form method="post" asp-action="Edit">
+<form method="post" asp-action="Delete">
+    <input asp-for="Id" hidden />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Edit Category</h2>
+            <h2 class="text-primary">Delete Category</h2>
             <hr />
         </div>
         <div class="mb-3 col-4">
             <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <input asp-for="Name" disabled class="form-control" />
         </div>
         <div class="mb-3 col-4">
             <label asp-for="DisplayOrder"></label>
-            <input asp-for="DisplayOrder" class="form-control" />
-             <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+            <input asp-for="DisplayOrder" disabled class="form-control" />
         </div>
-        <button type="submit" class="btn btn-primary" style="width:150px"><i class="bi bi-plus-circle"></i> Update</button>
+        <button type="submit" class="btn btn-danger" style="width:150px"><i class="bi bi-trash3-fill"></i> Delete</button>
         <a asp-controller="Category" asp-action="index" class="btn btn-secondary" style="width:150px;">
             <i class="bi bi-skip-backward-circle-fill"></i> Back to list
         </a>
