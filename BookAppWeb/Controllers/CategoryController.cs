@@ -1,4 +1,5 @@
 ﻿using BookApp.DataAccess;
+using BookApp.DataAccess.Repository.IRepository;
 using BookApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +7,15 @@ namespace BookAppWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ICategoryRepository _db;
 
-        public CategoryController(ApplicationDbContext db)
+        public CategoryController(ICategoryRepository db)
         {
             _db = db;
         }
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList=_db.Categories;
+            IEnumerable<Category> objCategoryList=_db.GetAll();
             return View(objCategoryList);
         }
 
@@ -35,8 +36,8 @@ namespace BookAppWeb.Controllers
                 
             }
             if (ModelState.IsValid) { 
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
+            _db.Add(obj);
+            _db.Save();
             TempData["success"] = "Category Created successfully";
             return RedirectToAction("Index");
             }
@@ -50,7 +51,7 @@ namespace BookAppWeb.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _db.Categories.Find(id);
+            var categoryFromDb = _db.GetFirstOrdefault(u=>u.Id==id);
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -70,8 +71,8 @@ namespace BookAppWeb.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(obj);
-                _db.SaveChanges();
+                _db.Update(obj);
+                _db.Save();
                 TempData["success"] = "Category Edited successfully";
                 return RedirectToAction("Index");
             }
@@ -85,7 +86,7 @@ namespace BookAppWeb.Controllers
             {
                 return NotFound();
             }
-            var categoryFromDb = _db.Categories.Find(id);
+            var categoryFromDb = _db.GetFirstOrdefault(u=>u.Id==id);
             if (categoryFromDb == null)
             {
                 return NotFound();
@@ -98,13 +99,13 @@ namespace BookAppWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-         var obj = _db.Categories.Find(id);
+         var obj = _db.GetFirstOrdefault(u=>u.Id==id);
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.Categories.Remove(obj);
-            _db.SaveChanges();
+            _db.Remove(obj);
+            _db.Save();
             TempData["success"] = "Category Removed successfully";
             return RedirectToAction("Index");
      
