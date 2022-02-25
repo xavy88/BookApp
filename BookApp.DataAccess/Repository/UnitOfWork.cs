@@ -18,7 +18,7 @@ namespace BookApp.DataAccess.Repository
             CoverType = new CoverTypeRepository(_db);
         }
         public ICategoryRepository Category { get; private set; }
-        S
+        
         public ICoverTypeRepository CoverType { get; private set; }
 
         public void Save()
