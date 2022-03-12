@@ -14,6 +14,6 @@ namespace BookApp.DataAccess.Repository.IRepository
 
         void Add(T entity);
         void Remove(T entity);
-        void RemoveRange(T entity);
+        void RemoveRange(IEnumerable<T> entity);
     }
 }
